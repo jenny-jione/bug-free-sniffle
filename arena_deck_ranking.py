@@ -35,4 +35,3 @@ deck_ranking.sort(reverse=True)
 
 for result in deck_ranking:
     print(result[1], ":", result[0])
-
