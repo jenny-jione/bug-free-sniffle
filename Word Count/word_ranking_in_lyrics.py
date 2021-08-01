@@ -1,6 +1,6 @@
 # 단어 출현 순위
 
-with open('spring_day.txt', 'r', encoding='UTF8') as f:
+with open('C:/Users/장지원/Desktop/dev/Word Count/spring_day.txt', 'r', encoding='UTF8') as f:
     text = f.read()
 
 word_list = text.split()
@@ -16,8 +16,13 @@ print(len(word_list_no_duplicate))
 for word in word_list_no_duplicate:
     word_count.append((word_list.count(word), word))
 
+n=1
 for result in sorted(word_count, reverse=True):
-    print(result[0], ':', result[1])
+    if n>10:
+        break
+    else:
+        print(result[0], ':', result[1])
+        n=n+1
 
 
 """

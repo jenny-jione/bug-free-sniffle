@@ -1,4 +1,4 @@
-with open('arena.txt', 'r', encoding='UTF8') as f:
+with open("C:/Users/장지원/Desktop/dev/Word Count/arena.txt", 'r', encoding='UTF8') as f:
     text = f.read()
 
 tmp = text.split() # 공백을 기준으로 text를 나누어서 리스트로 만든다.
