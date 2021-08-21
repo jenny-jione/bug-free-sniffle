@@ -13,7 +13,8 @@ def get_song_info(tr):
   song_id = tr.find("input", {"class":"input_check"}).get("value")
   song_id = int(song_id)
   title = tr.find("a", {"class":"fc_gray"}).string
-  album = tr.find_all("a", {"class":"fc_mgray"})[2].string
+  ellipsis = tr.find_all("div", {"class":"ellipsis"})[2]
+  album = ellipsis.find("a", {"class":"fc_mgray"}).string
   likes = 0
 
   return {
@@ -64,13 +65,13 @@ def make_xhr_link(song_id_set):
   return xhr
 
 
- def save_to_file(songs):
-   file = open(my_path+"/Data Processing/songs.csv", mode="w", newline="", encoding='utf-8-sig')
-   writer = csv.writer(file)
-   writer.writerow(["song_id", "title", "album", "likes"])
-   for song in songs:
-     writer.writerow(list(song.values()))
-   return
+def save_to_file(songs):
+  file = open(my_path+"/Data Processing/songs.csv", mode="w", newline="", encoding='utf-8-sig')
+  writer = csv.writer(file)
+  writer.writerow(["song_id", "title", "album", "likes"])
+  for song in songs:
+    writer.writerow(list(song.values()))
+  return
 
 
 
