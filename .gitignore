@@ -1,3 +1,4 @@
 Test/
-Data Processing/my_info.py
+my_info.py
 __pycache__
+Toy/*.txt
