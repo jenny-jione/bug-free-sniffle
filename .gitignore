@@ -1,4 +1,5 @@
 Test/
 my_info.py
 __pycache__
-Toy/*.txt
+*.txt
+*.csv
