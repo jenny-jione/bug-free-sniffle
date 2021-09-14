@@ -1,3 +1,5 @@
+# 21-08-10
+
 with open("C:/Users/장지원/Desktop/dev/Word Count/arena.txt", 'r', encoding='UTF8') as f:
     text = f.read()
 

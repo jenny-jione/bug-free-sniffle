@@ -1,4 +1,5 @@
 # 단어 출현 순위
+# 21-08-10
 
 with open('C:/Users/장지원/Desktop/dev/Word Count/spring_day.txt', 'r', encoding='UTF8') as f:
     text = f.read()
