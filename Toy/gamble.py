@@ -53,7 +53,6 @@ for x in sdict:
 # 막대그래프 그리기
 x = np.arange(len(dict))
 
-
 plt.bar(x,cnt)
 plt.xticks(x,implement)
 
