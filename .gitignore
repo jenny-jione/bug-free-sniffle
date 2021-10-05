@@ -5,3 +5,4 @@ __pycache__
 *.txt
 *.csv
 web_study/
+Web/node_modules
