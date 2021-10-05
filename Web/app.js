@@ -9,6 +9,7 @@ var app = express();
 app.set("view engine", "ejs")
 // app.use(express.static(__dirname+'/public'));
 app.use(express.static(path.join(__dirname, 'public')))
+app.use('/', (req, res) => { res.json({username:'유저 명'}); });
 
 var data = {count:0};
 
