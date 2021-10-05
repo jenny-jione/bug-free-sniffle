@@ -10,3 +10,7 @@ web_study/
 Web/node_modules
 mainpage.ejs
 *.geojson
+test.json
+seoul.json
+my.html
+temp.html
