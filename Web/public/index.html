@@ -24,7 +24,7 @@
   <div id="dong"></div>
   <div id="map" style="width:80%;height:600px;"></div>
 
-  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fb43fa40801b0b7e7c472c9a56ef7eca"></script>
+  <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=MY_APP_KEY"></script>
   <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
   <script>
@@ -86,6 +86,8 @@
         });
 
         district_centers.push(centroid(points));
+
+        // 구 커스텀 오버레이
         $.each(district_centers, function(index, item) {
           // 커스텀 오버레이에 표시할 내용입니다
           // HTML 문자열 또는 Dom Element 입니다
@@ -164,9 +166,6 @@
 
           redrawPolygon(path, name); // 클릭한 다각형만 다시 그리기
         });
-
-
-
       } // displayArea 함수 끝
 
 
@@ -243,20 +242,20 @@
             d_coordinates = val.geometry.coordinates;
             // console.log(val.geometry.coordinates[0]);
             d_name = val.properties.EMD_KOR_NM;
-            console.log(count++);
-            console.log(d_name);
+            polygon_type = val.geometry.type;
+            console.log(++count, d_name);
             dongs.push(d_name);
-            displayDong(d_coordinates, d_name);
+            if (polygon_type == 'MultiPolygon') {
+              displayMultipolygonDong(d_coordinates, d_name);
+            } else {
+              displayDong(d_coordinates, d_name);
+            }
           });
         });
-
-
-
-
       }
 
 
-
+      // 동 Polygon 생성
       function displayDong(coordinates, name) {
         //폴리곤 그려줄 path 배열 (각 동 폴리곤)
         var path = [];
@@ -265,8 +264,9 @@
         // 각 동 중심좌표 저장하는 배열
         var dong_centers = [];
 
+        var cnt = 0;
         //console.log(coordinates)를 확인해보면 보면 [0]번째에 배열이 주로 저장이 됨.  그래서 [0]번째 배열에서 꺼내줌.
-        $.each(coordinates[0], function(index, coordinate) { // 467번 반복
+        $.each(coordinates[0], function(index, coordinate) {
           var point = new Object();
           point.x = coordinate[1];
           point.y = coordinate[0];
@@ -277,6 +277,8 @@
         });
 
         dong_centers.push(centroid(points));
+
+        // 커스텀 오버레이
         $.each(dong_centers, function(index, item) {
           // 커스텀 오버레이에 표시할 내용입니다
           // HTML 문자열 또는 Dom Element 입니다
@@ -354,7 +356,47 @@
       } // displayDong 함수 끝
 
 
+      // 동 Polygon 생성 (MultiPolygon일 때)
+      function displayMultipolygonDong(coordinates, name) {
+        var polygonPath = [];
+        $.each(coordinates, function(index, val2) {
+          var coordinates2 = [];
+          $.each(val2[0], function(index2, coordinate) {
+            coordinates2.push(new kakao.maps.LatLng(coordinate[1], coordinate[0]));
+          });
+          polygonPath.push(coordinates2);
+        });
 
+        // 다각형을 생성합니다
+        var polygon = new kakao.maps.Polygon({
+          map: map, // 다각형을 표시할 지도 객체
+          path: polygonPath,
+          strokeWeight: 1,
+          strokeColor: '#8a4e91', // blue: 004c80; green: 00785c, purple: 8a4e91;
+          strokeOpacity: 0.8,
+          fillColor: '#fff',
+          fillOpacity: 0.4
+        });
+
+
+        // 다각형에 mouseover 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 변경합니다
+        kakao.maps.event.addListener(polygon, 'mouseover', function(mouseEvent) {
+          polygon.setOptions({
+            fillColor: '#e1b8e6', // blue: 09f, e1b8e6
+          });
+          console.log(++mcnt);
+          document.getElementById("dong").innerHTML = name;
+        });
+
+
+        // 다각형에 mouseout 이벤트를 등록하고 이벤트가 발생하면 폴리곤의 채움색을 원래색으로 변경합니다
+        // 커스텀 오버레이를 지도에서 제거합니다
+        kakao.maps.event.addListener(polygon, 'mouseout', function() {
+          polygon.setOptions({
+            fillColor: '#fff'
+          });
+        });
+      }
 
     });
   </script>
