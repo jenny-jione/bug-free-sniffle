@@ -47,7 +47,7 @@ function combineObject(gu, dong){
     var emdkr = item.EMD_KOR_NM;
 
     // EMD_CD 앞의 다섯자리와 SIG_CD가 같으면
-    if(emdcd.substr(0,5)==sigcd){
+    if(emdcd.substr(0,5)==gu[i].SIG_CD){
       // console.log("Same!", emdcd, sigcd, sigkr, emdkr);
       // seoul obj에 프로퍼티를 추가한다.
       seoul.push({
