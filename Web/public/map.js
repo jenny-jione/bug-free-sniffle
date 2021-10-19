@@ -321,4 +321,6 @@ function entireSeoulMap(){
   map.setLevel(9);
   map.setCenter(center_of_seoul);
   DrawSeoulMap();
+  document.getElementById("gu").innerHTML = "";
+  document.getElementById("dong").innerHTML = "";
 }
