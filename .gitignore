@@ -22,3 +22,5 @@ seoul_sig.json
 seoul_emd.json
 
 outcome/
+
+*.exe
