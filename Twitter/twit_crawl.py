@@ -17,12 +17,21 @@ api = twitter.Api(consumer_key=twitter_consumer_key,
                   access_token_secret=twitter_access_token_secret)
 
 account = "@BTS_twt"
-result = api.GetUserTimeline(screen_name=account, count=500, include_rts=False, exclude_replies=True)
+result = api.GetUserTimeline(screen_name=account, count=200, include_rts=False, exclude_replies=True)
 print(len(result))
 
 
 for twt in result:
     print(changeDateFormat(twt.created_at))
     print(twt.text)
+    if(twt.media):
+        # print(twt.media[0])
+        # print(twt.media[0].media_url_https)
+        print(len(twt.media))
+        pic_num = len(twt.media)
+        for i in range(pic_num):
+            print(twt.media[i].media_url_https)
     print()
     print()
+
+print(result[7])
