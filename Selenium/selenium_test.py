@@ -1,6 +1,7 @@
 # 22-01-24
 from selenium import webdriver
 from my_info import my_path, pw
+import time
 
 driver = webdriver.Chrome(my_path+'/Selenium/chromedriver.exe')
 url = 'https://weverse.io/'
@@ -20,9 +21,14 @@ driver.find_element_by_xpath('//*[@id="root"]/div/div/form/div[3]/button').click
 #  driver가 보는 대상을 메인 창으로 다시 변경
 driver.switch_to.window(driver.window_handles[0])
 
-driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[1]/div/button').click()
+time.sleep(2)
+
+# driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[1]/div/button').click()
 # 알림(종) 클릭
 driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[2]/div[1]/button').click()
 
 # 알림 목록 읽기
-driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[2]/div[1]/div')
+element = driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[2]/div[1]/div').text
+print(element)
+
+driver.quit()
