@@ -24,3 +24,7 @@ seoul_emd.json
 outcome/
 
 *.exe
+
+*.json
+Selenium/result.py
+Selenium/test.py
