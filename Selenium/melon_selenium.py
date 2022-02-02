@@ -61,7 +61,7 @@ def get_monthly_top_songs(month, year, num):
     time.sleep(0.5)
     tbody = driver.find_element(By.TAG_NAME, "tbody")
     trs = tbody.find_elements(By.TAG_NAME, "tr")
-    print(len(trs))
+    # print(len(trs))
 
     for i in range(num):
         try:
@@ -72,13 +72,22 @@ def get_monthly_top_songs(month, year, num):
             artist = trs[i].find_element(By.ID, "artistName").text
             msl.append(rank)
             msl.append(title)
-            print(title)
+            # print(title)
+            if i==0:
+                print(title)
+                print()
             msl.append(artist)
-            monthly_top_songs.append(msl)
+            msl.append(year)
+            msl.append(month)
+            # monthly_top_songs.append(msl)
         except:
+            msl = []
             print("해당 월에 들은 노래가 없습니다.")
             print()
-            monthly_top_songs.append("None")
+            msl.append("None")
+            # monthly_top_songs.append("None")
+
+        monthly_top_songs.append(msl)
 
     # trs = tbody.find_elements(By.TAG_NAME, "tr")
     #
@@ -124,7 +133,7 @@ def check_year():
     my_list = []
     year = driver.find_element(By.CLASS_NAME, "date").text
     while(True):
-        if year == "2019":
+        if year == "2015":
             print("종료")
             break
         elif year == "2022":
