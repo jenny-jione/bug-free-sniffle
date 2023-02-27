@@ -28,3 +28,5 @@ outcome/
 *.json
 Selenium/result.py
 Selenium/test.py
+
+venv/
